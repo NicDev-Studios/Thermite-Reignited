@@ -1,0 +1,32 @@
+mod.id = "therm"
+mod.name = "Thermite"
+mod.group = "thermite.therm"
+mod.version = "6.0.0-alpha.1"
+
+loomx.loom_version = "1.17.12"
+
+["1.20.1"]
+mod.artifact_mc = "1.20.1"
+mod.mc_compat = "~1.20.1"
+mod.loader_compat = ">=0.14.21"
+mod.completeconfig_compat = ">=2.5.0"
+mod.pack_format = "15"
+mod.pack_format_min = "15"
+mod.pack_format_max = "15"
+deps.yarn = "1.20.1+build.3"
+deps.fabric_loader = "0.14.21"
+deps.fabric_api = "0.83.1+1.20.1"
+deps.completeconfig = "2.5.0"
+
+["1.20.4"]
+mod.artifact_mc = "1.20.3-1.20.4"
+mod.mc_compat = ">=1.20.3 <=1.20.4"
+mod.loader_compat = ">=0.15.11"
+mod.completeconfig_compat = ">=2.5.3"
+mod.pack_format = "22"
+mod.pack_format_min = "18"
+mod.pack_format_max = "22"
+deps.yarn = "1.20.4+build.3"
+deps.fabric_loader = "0.15.11"
+deps.fabric_api = "0.97.3+1.20.4"
+deps.completeconfig = "2.5.3"
