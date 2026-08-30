@@ -1,3 +1,17 @@
+# Development quick start
+
+The root project exposes short commands, so the Stonecutter project paths do not
+need to be memorized:
+
+```powershell
+.\gradlew.bat client                    # Start Minecraft 1.20.4
+.\gradlew.bat client1201                # Start Minecraft 1.20.1
+.\gradlew.bat pilotCheck                # Test and build every pilot variant
+.\gradlew.bat thermiteHelp              # Show all short commands
+```
+
+The 1.20.4 client is the default because it is the newest pilot node.
+
 ### License
 This mod is available under the MIT license.
 

@@ -42,10 +42,14 @@ Pack metadata is expanded per node. The 1.20.4 resource pack advertises formats
 ## Automated verification
 
 ```powershell
-.\gradlew.bat :1.20.1:test :1.20.4:test
-.\gradlew.bat :1.20.1:buildAndCollect :1.20.4:buildAndCollect
-.\gradlew.bat :1.20.1:runServer
-.\gradlew.bat :1.20.4:runServer
+.\gradlew.bat client
+.\gradlew.bat client1201
+.\gradlew.bat server
+.\gradlew.bat server1201
+.\gradlew.bat testAll
+.\gradlew.bat jars
+.\gradlew.bat pilotCheck
+.\gradlew.bat thermiteHelp
 ```
 
 The server commands intentionally stop at Mojang's EULA on a new checkout.
