@@ -59,7 +59,8 @@ Run these from the project directory:
 
 The 1.20.x workflow runs on every push and pull request on Linux and Windows.
 `pilotCheck` compiles all three build nodes, runs the tests and collects the
-three JARs.
+three JARs. The workflow uses Java 21 to run Gradle; the mod itself is still
+compiled for Java 17.
 
 There are currently 12 tests per build node: temperature behaviour, NBT
 persistence, and the important packaged resources/metadata. That checks the

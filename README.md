@@ -50,6 +50,7 @@ This mod is available under the MIT license.
 - Minecraft: 1.20.2, 1.20.3 and 1.20.4
 - Fabric API: 0.91.6+1.20.2 and 0.97.3+1.20.4
 - CompleteConfig: 2.5.0 for 1.20.2 and 2.5.3 for 1.20.4
+- Build runtime: Java 21 (the mod is compiled for Java 17)
 - 1.20.1 remains available as a reference build
 
 Exact mappings, loaders and artifact names are listed in
