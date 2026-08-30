@@ -5,7 +5,7 @@
 mod.id = "therm"
 mod.name = "Thermite"
 mod.group = "thermite.therm"
-mod.version = "6.0.0-alpha.1"
+mod.version = "1.0.0-alpha.1"
 
 loomx.loom_version = "1.17.12"
 
