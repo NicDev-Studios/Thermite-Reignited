@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class IceBoxEmptyBlock extends Block {
 
     public IceBoxEmptyBlock(Settings settings) {

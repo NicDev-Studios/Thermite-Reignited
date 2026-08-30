@@ -25,6 +25,7 @@ import thermite.therm.ThermUtil;
 
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class IceBoxFreezingBlock extends Block {
 
     public IceBoxFreezingBlock(Settings settings) {

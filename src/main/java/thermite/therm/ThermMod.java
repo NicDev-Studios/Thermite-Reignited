@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -73,7 +72,7 @@ public class ThermMod implements ModInitializer {
 	public static final BlockEntityType<FireplaceBlockEntity> FIREPLACE_BLOCK_ENTITY = Registry.register(
 			Registries.BLOCK_ENTITY_TYPE,
 			new Identifier(modid, "fireplace_block_entity"),
-			FabricBlockEntityTypeBuilder.create(FireplaceBlockEntity::new, ThermBlocks.FIREPLACE_BLOCK).build()
+			BlockEntityType.Builder.create(FireplaceBlockEntity::new, ThermBlocks.FIREPLACE_BLOCK).build(null)
 	);
 
 	//special recipes

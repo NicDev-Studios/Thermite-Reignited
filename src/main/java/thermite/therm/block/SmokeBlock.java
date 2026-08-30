@@ -15,6 +15,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class SmokeBlock extends Block{
 
     public SmokeBlock(Settings settings) {

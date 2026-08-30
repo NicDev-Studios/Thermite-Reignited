@@ -81,24 +81,24 @@ public class ThermConfig extends Config {
     public float hypothermiaDamage = 1.5f;
 
     @ConfigEntry(comment = "Helmets that will change your temperature.")
-    public Map<String, Integer> helmetTempItems = new HashMap(Map.of("leather_helmet", 1));
+    public Map<String, Integer> helmetTempItems = new HashMap<>(Map.of("leather_helmet", 1));
 
     @ConfigEntry(comment = "Chestplates that will change your temperature.")
-    public Map<String, Integer> chestplateTempItems = new HashMap(Map.of("leather_chestplate", 3));
+    public Map<String, Integer> chestplateTempItems = new HashMap<>(Map.of("leather_chestplate", 3));
 
     @ConfigEntry(comment = "Leggings that will change your temperature.")
-    public Map<String, Integer> leggingTempItems = new HashMap(Map.of("leather_leggings", 2));
+    public Map<String, Integer> leggingTempItems = new HashMap<>(Map.of("leather_leggings", 2));
 
     @ConfigEntry(comment = "Boots that will change your temperature.")
-    public Map<String, Integer> bootTempItems = new HashMap(Map.of("leather_boots", 1));
+    public Map<String, Integer> bootTempItems = new HashMap<>(Map.of("leather_boots", 1));
 
     @ConfigEntry(comment = "Items that when held will change your temperature.")
-    public Map<String, Integer> heldTempItems = new HashMap(Map.of("torch", 3, "lava_bucket", 3));
+    public Map<String, Integer> heldTempItems = new HashMap<>(Map.of("torch", 3, "lava_bucket", 3));
 
     //public Map<String, Integer> heatingBlocks = new HashMap(Map.of("Block{minecraft:torch}", 3, "Block{minecraft:fire}", 3, "Block{minecraft:lava}", 8, "Block{minecraft:campfire}", 15, "Block{minecraft:wall_torch}", 3, "Block{minecraft:soul_torch}", 3, "Block{minecraft:soul_wall_torch}", 3, "Block{minecraft:soul_campfire}", 15, "Block{minecraft:lava_cauldron}", 8, "Block{minecraft:furnace}[facing=north,lit=true]", 3, "Block{minecraft:furnace}[facing=east,lit=true]", 3, "Block{minecraft:furnace}[facing=south,lit=true]", 3, "Block{minecraft:furnace}[facing=west,lit=true]", 3));
 
     @ConfigEntry(comment = "Blocks that will heat you up when near.")
-    public Map<String, Integer> heatingBlocks = new HashMap(Map.ofEntries(
+    public Map<String, Integer> heatingBlocks = new HashMap<>(Map.ofEntries(
             Map.entry("Block{minecraft:fire}", 3),
             Map.entry("Block{minecraft:lava}", 1),
             Map.entry("Block{minecraft:campfire}", 15),
@@ -123,7 +123,7 @@ public class ThermConfig extends Config {
             ));
 
     @ConfigEntry(comment = "Blocks that will cool you down when near.")
-    public Map<String, Integer> coolingBlocks = new HashMap(Map.ofEntries(
+    public Map<String, Integer> coolingBlocks = new HashMap<>(Map.ofEntries(
             Map.entry("Block{minecraft:ice}", 1),
             Map.entry("Block{minecraft:packed_ice}", 3),
             Map.entry("Block{minecraft:blue_ice}", 6),

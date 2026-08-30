@@ -37,6 +37,9 @@ import thermite.therm.block.entity.FireplaceBlockEntity;
 
 import java.util.Objects;
 
+// AbstractBlock marks these hooks deprecated because the state delegates to them;
+// overriding them is the supported extension point for custom blocks.
+@SuppressWarnings("deprecation")
 public class FireplaceBlock extends BlockWithEntity implements BlockEntityProvider {
 
     //? if >=1.20.3 {
