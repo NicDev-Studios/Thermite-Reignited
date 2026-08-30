@@ -44,7 +44,7 @@ loom {
         displayName.set("Minecraft $side ${sc.current.version}")
         generateRunConfig.set(true)
         appendProjectPathToDisplayName.set(false)
-        ideConfigFolder.set("")
+        ideConfigFolder.set("Thermite")
         preferGradleTask = true
         runDirectory = rootProject.file("run/${sc.current.project}")
     }
