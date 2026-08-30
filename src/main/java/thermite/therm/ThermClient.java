@@ -4,9 +4,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Items;
@@ -15,13 +12,13 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
-import thermite.therm.client.TemperatureHudOverlay;
-import thermite.therm.networking.ThermNetworkingPackets;
+import thermite.therm.platform.FabricClientThermPlatform;
+import thermite.therm.platform.ThermPlatform;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class ThermClient implements ClientModInitializer {
+    private static final ThermPlatform.Client PLATFORM = new FabricClientThermPlatform();
 
     public static long clientStoredTemperature = 70;
     public static short clientStoredTempDir = 32;
@@ -30,9 +27,6 @@ public class ThermClient implements ClientModInitializer {
     public static double clientStoredWindTemp = 0;
 
     public static boolean windParticles = false;
-
-    public static int tempTickCounter = 0;
-    public static final int tempTickCount = 20;
 
     public static boolean showGui = true;
     private static KeyBinding showGuiKey;
@@ -52,30 +46,17 @@ public class ThermClient implements ClientModInitializer {
                 "Thermite"
         ));
 
-        ThermNetworkingPackets.registerS2CPackets();
-
-        //hud
-        HudRenderCallback.EVENT.register(new TemperatureHudOverlay());
+        PLATFORM.registerNetworking();
+        PLATFORM.registerHud();
 
         //tick
         ClientTickEvents.START_CLIENT_TICK.register((client) -> {
             if (client.world != null) {
                 if (client.world.isClient()) {
 
-                    if (tempTickCounter < tempTickCount) {
-                        tempTickCounter += 1;
-                    } else if (tempTickCounter >= tempTickCount) {
-                        boolean paused = false;
-                        if (client.isInSingleplayer() && client.isPaused()) {
-                            paused = true;
-                            windParticles = false;
-                        }
-                        if (!paused && !client.player.isCreative() && !client.player.isSpectator()) {
-                            ClientPlayNetworking.send(ThermNetworkingPackets.PLAYER_TEMP_TICK_C2S_PACKET_ID, PacketByteBufs.create());
-                            windParticles = true;
-                        }
-                        tempTickCounter = 0;
-                    }
+                    boolean paused = client.isInSingleplayer() && client.isPaused();
+                    windParticles = !paused && client.player != null
+                            && !client.player.isCreative() && !client.player.isSpectator();
 
                     if (windParticles && ThermMod.config.enableWindParticles) {
                         Random rand = new Random();

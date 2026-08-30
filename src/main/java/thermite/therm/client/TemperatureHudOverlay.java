@@ -37,8 +37,8 @@ public class TemperatureHudOverlay implements HudRenderCallback {
     private static final Identifier HEATING_OUTLINE = new Identifier(ThermMod.modid, "textures/glass_thermometer/heating_outline.png");
     private static final Identifier HEATING_OUTLINE_SMALL = new Identifier(ThermMod.modid, "textures/glass_thermometer/heating_small_outline.png");
 
-    public static final Identifier TEMPERATURE_EXTREME_OVERLAY = new Identifier(ThermMod.modid, "textures/misc/temp_extreme_1.png");
-    public static final Identifier TEMPERATURE_EXTREME_OVERLAY2 = new Identifier(ThermMod.modid, "textures/misc/temp_extreme_2.png");
+    public static final Identifier TEMPERATURE_EXTREME_OVERLAY = new Identifier("minecraft", "textures/misc/vignette.png");
+    public static final Identifier TEMPERATURE_EXTREME_OVERLAY2 = TEMPERATURE_EXTREME_OVERLAY;
 
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {

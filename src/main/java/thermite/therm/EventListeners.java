@@ -11,13 +11,16 @@ import java.util.Random;
 import static thermite.therm.ThermMod.modVersion;
 
 public class EventListeners {
+    private static final int TEMPERATURE_SAMPLE_INTERVAL = 20;
+    private static final TemperatureService TEMPERATURE_SERVICE = new TemperatureService(ThermMod.PLATFORM);
+    private static int temperatureSampleTick;
 
     public static void register() {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 
-            ServerState serverState = ServerState.getServerState(handler.player.getWorld().getServer());
-            ThermPlayerState playerState = ServerState.getPlayerState(handler.player);
+            ServerState serverState = ThermMod.PLATFORM.getServerState(handler.player.getWorld().getServer());
+            ThermPlayerState playerState = ThermMod.PLATFORM.getPlayerState(handler.player);
 
             if (!Objects.equals(serverState.worldVersion, modVersion)) {
 
@@ -37,7 +40,7 @@ public class EventListeners {
         });
 
         ServerTickEvents.END_SERVER_TICK.register((server) -> {
-            ServerState serverState = ServerState.getServerState(server);
+            ServerState serverState = ThermMod.PLATFORM.getServerState(server);
 
             if (serverState.windRandomizeTick >= 24000) {
                 serverState.windRandomizeTick = 0;
@@ -54,17 +57,19 @@ public class EventListeners {
             }
             serverState.windRandomizeTick += 1;
 
-            server.getPlayerManager().getPlayerList().forEach((player) -> {
-
-                //ThermMod.LOGGER.info()
-
-            });
+            temperatureSampleTick++;
+            if (temperatureSampleTick >= TEMPERATURE_SAMPLE_INTERVAL) {
+                temperatureSampleTick = 0;
+                server.getPlayerManager().getPlayerList().stream()
+                        .filter(player -> !player.isCreative() && !player.isSpectator())
+                        .forEach(player -> temperatureTick(server, player));
+            }
 
         });
 
     }
 
     private static void temperatureTick(MinecraftServer server, ServerPlayerEntity player) {
-
+        TEMPERATURE_SERVICE.tick(server, player);
     }
 }

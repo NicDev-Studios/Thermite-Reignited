@@ -28,6 +28,8 @@ import thermite.therm.block.entity.FireplaceBlockEntity;
 import thermite.therm.effect.ThermStatusEffects;
 import thermite.therm.item.*;
 import thermite.therm.networking.ThermNetworkingPackets;
+import thermite.therm.platform.FabricThermPlatform;
+import thermite.therm.platform.ThermPlatform;
 import thermite.therm.recipe.LeatherArmorWoolRecipe;
 
 import java.util.Objects;
@@ -44,7 +46,8 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class ThermMod implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("therm");
 	public static final String modid = "therm";
-	public static final String modVersion = "5.0.0.3";
+	public static final String modVersion = "6.0.0-alpha.1";
+	public static final ThermPlatform PLATFORM = new FabricThermPlatform();
 
 	//items
 	public static final GoldSweetBerriesItem GOLD_SWEET_BERRIES_ITEM = new GoldSweetBerriesItem(new FabricItemSettings().maxCount(64));
@@ -68,7 +71,7 @@ public class ThermMod implements ModInitializer {
 	);
 
 	//special recipes
-	public static final RecipeSerializer<LeatherArmorWoolRecipe> LEATHER_ARMOR_WOOL_RECIPE_SERIALIZER = RecipeSerializer.register("crafting_special_leather_armor_wool", new SpecialRecipeSerializer<LeatherArmorWoolRecipe>(LeatherArmorWoolRecipe::new));
+	public static final RecipeSerializer<LeatherArmorWoolRecipe> LEATHER_ARMOR_WOOL_RECIPE_SERIALIZER = PLATFORM.createLeatherArmorRecipeSerializer();
 
 	//config
 	public static final ThermConfig config = new ThermConfig();
@@ -79,46 +82,9 @@ public class ThermMod implements ModInitializer {
 		config.load();
 		ConfigOptions.mod(modid).branch(new String[]{"branch", "config"});
 
-		//status effects
-		Registry.register(Registries.STATUS_EFFECT, new Identifier(modid, "cooling"), ThermStatusEffects.COOLING);
+		PLATFORM.registerContent();
 
-		//items
-		Registry.register(Registries.ITEM, new Identifier(modid, "gold_sweet_berries"), GOLD_SWEET_BERRIES_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "ice_juice"), ICE_JUICE_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "thermometer"), THERMOMETER_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "wool_cloth"), WOOL_CLOTH_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "tester_item"), TESTER_ITEM);
-
-		//blocks
-		Registry.register(Registries.BLOCK, new Identifier(modid, "ice_box_empty"), ThermBlocks.ICE_BOX_EMPTY_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(modid, "ice_box_freezing"), ThermBlocks.ICE_BOX_FREEZING_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(modid, "ice_box_frozen"), ThermBlocks.ICE_BOX_FROZEN_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(modid, "fireplace"), ThermBlocks.FIREPLACE_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(modid, "smoke"), ThermBlocks.SMOKE_BLOCK);
-
-		//block item registry
-		Registry.register(Registries.ITEM, new Identifier(modid, "ice_box_empty_item"), ICE_BOX_EMPTY_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "ice_box_freezing_item"), ICE_BOX_FREEZING_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "ice_box_frozen_item"), ICE_BOX_FROZEN_ITEM);
-		Registry.register(Registries.ITEM, new Identifier(modid, "fireplace_item"), FIREPLACE_ITEM);
-
-		//item groups
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
-			content.add(GOLD_SWEET_BERRIES_ITEM);
-			content.add(ICE_JUICE_ITEM);
-		});
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(content -> {
-			content.add(THERMOMETER_ITEM);
-		});
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
-			content.add(ICE_BOX_EMPTY_ITEM);
-			content.add(FIREPLACE_ITEM);
-		});
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
-			content.add(WOOL_CLOTH_ITEM);
-		});
-
-		ThermNetworkingPackets.registerC2SPackets();
+		PLATFORM.registerNetworking();
 
 		//events
 		EventListeners.register();
@@ -126,5 +92,9 @@ public class ThermMod implements ModInitializer {
 		//commands
 		Commands.register();
 
+	}
+
+	public static Identifier id(String path) {
+		return new Identifier(modid, path);
 	}
 }
