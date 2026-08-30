@@ -42,7 +42,7 @@ class ResourceIntegrityTest {
         String packMetadata = readResource("pack.mcmeta");
 
         assertTrue(modMetadata.contains("\"id\": \"therm\""));
-        assertTrue(modMetadata.contains("\"version\": \"6.0.0-alpha.1+mc"));
+        assertTrue(modMetadata.contains("\"version\": \"1.0.0-alpha.1+mc"));
         assertFalse(modMetadata.contains("${"));
         assertFalse(packMetadata.contains("${"));
         assertTrue(packMetadata.contains("supported_formats"));
