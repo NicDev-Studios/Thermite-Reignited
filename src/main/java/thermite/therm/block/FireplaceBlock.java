@@ -1,5 +1,8 @@
 package thermite.therm.block;
 
+//? if >=1.20.3 {
+/*import com.mojang.serialization.MapCodec;
+*///?}
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -29,6 +32,15 @@ import thermite.therm.block.entity.FireplaceBlockEntity;
 import java.util.Objects;
 
 public class FireplaceBlock extends BlockWithEntity implements BlockEntityProvider {
+
+    //? if >=1.20.3 {
+    /*public static final MapCodec<FireplaceBlock> CODEC = createCodec(FireplaceBlock::new);
+
+    @Override
+    public MapCodec<FireplaceBlock> getCodec() {
+        return CODEC;
+    }
+    *///?}
 
     public static final BooleanProperty LIT = BooleanProperty.of("lit");
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
@@ -92,7 +104,11 @@ public class FireplaceBlock extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        //? if >=1.20.3 {
+        /*return FireplaceBlock.validateTicker(type, ThermMod.FIREPLACE_BLOCK_ENTITY, FireplaceBlockEntity::tick);
+        *///?} else {
         return FireplaceBlock.checkType(type, ThermMod.FIREPLACE_BLOCK_ENTITY, (world1, pos, state1, be) -> FireplaceBlockEntity.tick(world1, pos, state1, be));
+        //?}
     }
 
     @Override

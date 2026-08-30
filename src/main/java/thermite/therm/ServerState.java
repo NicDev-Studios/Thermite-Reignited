@@ -12,6 +12,14 @@ import java.util.UUID;
 
 public class ServerState extends PersistentState {
 
+    //? if >=1.20.3 {
+    /*private static final PersistentState.Type<ServerState> TYPE = new PersistentState.Type<>(
+            ServerState::new,
+            ServerState::createFromNbt,
+            null
+    );
+    *///?}
+
     String worldVersion = "4.1.0.8";
     int testInt = 0;
     public int season = 0;
@@ -115,10 +123,14 @@ public class ServerState extends PersistentState {
         PersistentStateManager persistentStateManager = server
                 .getWorld(World.OVERWORLD).getPersistentStateManager();
 
+        //? if >=1.20.3 {
+        /*ServerState serverState = persistentStateManager.getOrCreate(TYPE, ThermMod.modid);
+        *///?} else {
         ServerState serverState = persistentStateManager.getOrCreate(
                 ServerState::createFromNbt,
                 ServerState::new,
                 ThermMod.modid);
+        //?}
 
         return serverState;
     }

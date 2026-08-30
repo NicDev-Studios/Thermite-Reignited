@@ -14,9 +14,15 @@ import thermite.therm.ThermMod;
 
 public class LeatherArmorWoolRecipe extends SpecialCraftingRecipe {
 
+    //? if >=1.20.3 {
+    /*public LeatherArmorWoolRecipe(CraftingRecipeCategory craftingRecipeCategory) {
+        super(craftingRecipeCategory);
+    }
+    *///?} else {
     public LeatherArmorWoolRecipe(Identifier identifier, CraftingRecipeCategory craftingRecipeCategory) {
         super(identifier, craftingRecipeCategory);
     }
+    //?}
 
     @Override
     public boolean matches(RecipeInputInventory recipeInputInventory, World world) {
@@ -78,10 +84,12 @@ public class LeatherArmorWoolRecipe extends SpecialCraftingRecipe {
         return width * height >= 2;
     }
 
+    //? if <1.20.3 {
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
         return new ItemStack(Items.LEATHER_HELMET);
     }
+    //?}
 
     @Override
     public RecipeSerializer<?> getSerializer() {
