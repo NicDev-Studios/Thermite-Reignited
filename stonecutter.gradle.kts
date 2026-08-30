@@ -68,6 +68,12 @@ tasks.register("pilotCheck") {
     dependsOn("testAll", "jars")
 }
 
+tasks.register("ideaRuns") {
+    group = "thermite"
+    description = "Regenerates version-labelled IntelliJ client and server configurations."
+    dependsOn(":1.20.1:ideaSyncTask", ":1.20.4:ideaSyncTask")
+}
+
 tasks.register("thermiteHelp") {
     group = "thermite"
     description = "Prints the short Thermite development command reference."
@@ -85,6 +91,7 @@ tasks.register("thermiteHelp") {
             gradlew jars                           Build both distributable jars
             gradlew testAll                        Test both versions
             gradlew pilotCheck                     Test and build everything
+            gradlew ideaRuns                       Regenerate IntelliJ run entries
             gradlew tasks --group thermite         Show these tasks
 
             Advanced: quoted version selection also works on PowerShell:

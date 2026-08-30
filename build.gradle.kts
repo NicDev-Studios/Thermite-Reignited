@@ -36,6 +36,15 @@ dependencies {
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json")
     runConfigs.all {
+        val side = when (name) {
+            "client" -> "Client"
+            "server" -> "Server"
+            else -> name.replaceFirstChar { it.uppercase() }
+        }
+        displayName.set("Minecraft $side ${sc.current.version}")
+        generateRunConfig.set(true)
+        appendProjectPathToDisplayName.set(false)
+        ideConfigFolder.set("")
         preferGradleTask = true
         runDirectory = rootProject.file("run/${sc.current.project}")
     }

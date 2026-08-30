@@ -49,6 +49,7 @@ Pack metadata is expanded per node. The 1.20.4 resource pack advertises formats
 .\gradlew.bat testAll
 .\gradlew.bat jars
 .\gradlew.bat pilotCheck
+.\gradlew.bat ideaRuns
 .\gradlew.bat thermiteHelp
 ```
 

@@ -7,6 +7,7 @@ need to be memorized:
 .\gradlew.bat client                    # Start Minecraft 1.20.4
 .\gradlew.bat client1201                # Start Minecraft 1.20.1
 .\gradlew.bat pilotCheck                # Test and build every pilot variant
+.\gradlew.bat ideaRuns                  # Regenerate versioned IntelliJ runs
 .\gradlew.bat thermiteHelp              # Show all short commands
 ```
 
