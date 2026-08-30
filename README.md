@@ -86,7 +86,7 @@ The direction icon is the icon in the middle of the gauge. is a white ball when 
 
 ### 1.20.x pilot builds
 
-The `codex/1.20.x` branch uses Stonecutter to keep shared sources and small
+The `1.20.x` branch uses Stonecutter to keep shared sources and small
 version adapters in one branch. It produces separate, remapped jars:
 
 - `therm-6.0.0-alpha.1+mc1.20.1.jar`
