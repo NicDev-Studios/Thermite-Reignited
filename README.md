@@ -6,8 +6,8 @@ SPDX-License-Identifier: MIT
 
 # Thermite-Reignited
 
-[![1.20.x CI](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml/badge.svg?branch=1.20.x)](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml?query=branch%3A1.20.x)
-[![legacy CI](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml/badge.svg?branch=legacy)](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml?query=branch%3Alegacy)
+[![1.20.x](https://img.shields.io/github/actions/workflow/status/NicDev-Studios/Thermite-Reignited/build.yml?branch=1.20.x&label=1.20.x)](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml?query=branch%3A1.20.x)
+[![legacy](https://img.shields.io/github/actions/workflow/status/NicDev-Studios/Thermite-Reignited/build.yml?branch=legacy&label=legacy)](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml?query=branch%3Alegacy)
 [![Minecraft 1.20.2-1.20.4](https://img.shields.io/badge/Minecraft-1.20.2--1.20.4-62b47a)](docs/PILOT_1.20.x.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -50,6 +50,7 @@ This mod is available under the MIT license.
 - Minecraft: 1.20.2, 1.20.3 and 1.20.4
 - Fabric API: 0.91.6+1.20.2 and 0.97.3+1.20.4
 - CompleteConfig: 2.5.0 for 1.20.2 and 2.5.3 for 1.20.4
+- Gradle: 9.7.1 via the checked-in wrapper
 - Build runtime: Java 21 (the mod is compiled for Java 17)
 - 1.20.1 remains available as a reference build
 
