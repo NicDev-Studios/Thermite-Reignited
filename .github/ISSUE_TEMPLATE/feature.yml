@@ -1,0 +1,58 @@
+name: Feature request
+description: Suggest a focused improvement for Thermite
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Temperature gameplay
+        - Blocks or items
+        - HUD or client presentation
+        - Configuration
+        - Compatibility or version port
+        - Build or developer tooling
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What limitation or player/developer need should this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Explain how the feature should work from the user's perspective.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Mention workarounds or other designs you considered.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add mockups, links, compatibility details, or examples if useful.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and did not find the same request.
+          required: true
+        - label: This request describes one focused feature or improvement.
+          required: true

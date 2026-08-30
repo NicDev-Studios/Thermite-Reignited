@@ -1,0 +1,88 @@
+name: Bug report
+description: Report a reproducible Thermite problem
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Thermite. Please test without unrelated mods when possible.
+
+  - type: dropdown
+    id: minecraft-version
+    attributes:
+      label: Minecraft version
+      options:
+        - "1.20.1"
+        - "1.20.3"
+        - "1.20.4"
+        - Other or unsupported
+    validations:
+      required: true
+
+  - type: input
+    id: thermite-version
+    attributes:
+      label: Thermite version
+      description: Use the complete version shown in the jar name or Mods screen.
+      placeholder: 6.0.0-alpha.1+mc1.20.3-1.20.4
+    validations:
+      required: true
+
+  - type: input
+    id: loader-version
+    attributes:
+      label: Fabric Loader version
+      placeholder: 0.15.11
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start a world with ...
+        2. Place or use ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: mods
+    attributes:
+      label: Installed mods
+      description: Include Fabric API, CompleteConfig, and every other installed mod with versions.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or crash report
+      description: Paste the relevant section or attach latest.log/crash-report. Remove secrets and personal paths first.
+      render: shell
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for this problem.
+          required: true
+        - label: I can reproduce this with the required dependencies installed.
+          required: true
+        - label: I removed passwords, tokens, and other sensitive data from attached logs.
+          required: true
