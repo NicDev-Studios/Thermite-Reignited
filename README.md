@@ -4,7 +4,7 @@ This mod is available under the MIT license.
 ### Dependencies for Latest Version
 [Fabric Api](https://modrinth.com/mod/fabric-api/version/0.83.1+1.20.1) >=0.83.1 for mc 1.20.1
 
-[CompleteConfig](https://modrinth.com/mod/completeconfig/version/2.4.0) >=2.4.0 for mc 1.20.1
+[CompleteConfig](https://modrinth.com/mod/completeconfig/version/2.5.0) >=2.5.0 for mc 1.20.1
 
 [Roughly Enough Items](https://modrinth.com/mod/rei/version/12.0.625+fabric) (Recommended)
 
@@ -68,6 +68,24 @@ The direction icon is the icon in the middle of the gauge. is a white ball when 
 
 #### Temperature cooling down:
 <img src="https://cdn-raw.modrinth.com/data/ggmtYNuc/images/fe9742ccde814a169dbff4c9a89dca2ff65e4866.png"  width="50%" height="50%">
+
+### 1.20.x pilot builds
+
+The `codex/1.20.x` branch uses Stonecutter to keep shared sources and small
+version adapters in one branch. It produces separate, remapped jars:
+
+- `therm-6.0.0-alpha.1+mc1.20.1.jar`
+- `therm-6.0.0-alpha.1+mc1.20.3-1.20.4.jar`
+
+Build and test both variants with:
+
+```powershell
+.\gradlew.bat :1.20.1:test :1.20.4:test
+.\gradlew.bat :1.20.1:buildAndCollect :1.20.4:buildAndCollect
+```
+
+Collected artifacts are written to `build/libs/6.0.0-alpha.1/`. See
+`docs/PILOT_1.20.x.md` for the adapter matrix and manual acceptance checklist.
 
 
 
