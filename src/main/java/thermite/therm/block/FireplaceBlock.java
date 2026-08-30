@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023 sparkierkan7
+ * Modifications Copyright (c) 2026 NicDev-Studios
+ * SPDX-License-Identifier: MIT
+ */
+
 package thermite.therm.block;
 
 //? if >=1.20.3 {
@@ -104,7 +110,7 @@ public class FireplaceBlock extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        //? if >=1.20.3 {
+        //? if >=1.20.2 {
         /*return FireplaceBlock.validateTicker(type, ThermMod.FIREPLACE_BLOCK_ENTITY, FireplaceBlockEntity::tick);
         *///?} else {
         return FireplaceBlock.checkType(type, ThermMod.FIREPLACE_BLOCK_ENTITY, (world1, pos, state1, be) -> FireplaceBlockEntity.tick(world1, pos, state1, be));

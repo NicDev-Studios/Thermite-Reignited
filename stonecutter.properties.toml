@@ -1,3 +1,7 @@
+## Copyright (c) 2023 sparkierkan7
+## Modifications Copyright (c) 2026 NicDev-Studios
+## SPDX-License-Identifier: MIT
+
 mod.id = "therm"
 mod.name = "Thermite"
 mod.group = "thermite.therm"
@@ -16,6 +20,19 @@ mod.pack_format_max = "15"
 deps.yarn = "1.20.1+build.3"
 deps.fabric_loader = "0.14.21"
 deps.fabric_api = "0.83.1+1.20.1"
+deps.completeconfig = "2.5.0"
+
+["1.20.2"]
+mod.artifact_mc = "1.20.2"
+mod.mc_compat = "~1.20.2"
+mod.loader_compat = ">=0.14.22"
+mod.completeconfig_compat = ">=2.5.0"
+mod.pack_format = "18"
+mod.pack_format_min = "18"
+mod.pack_format_max = "18"
+deps.yarn = "1.20.2+build.4"
+deps.fabric_loader = "0.14.22"
+deps.fabric_api = "0.91.6+1.20.2"
 deps.completeconfig = "2.5.0"
 
 ["1.20.4"]

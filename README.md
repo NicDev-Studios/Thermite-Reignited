@@ -1,4 +1,27 @@
-# Development quick start
+<!--
+Copyright (c) 2023 sparkierkan7
+Modifications Copyright (c) 2026 NicDev-Studios
+SPDX-License-Identifier: MIT
+-->
+
+# Thermite-Reignited
+
+[![1.20.x CI](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml/badge.svg?branch=1.20.x)](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml?query=branch%3A1.20.x)
+[![legacy CI](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml/badge.svg?branch=legacy)](https://github.com/NicDev-Studios/Thermite-Reignited/actions/workflows/build.yml?query=branch%3Alegacy)
+[![Minecraft 1.20.2-1.20.4](https://img.shields.io/badge/Minecraft-1.20.2--1.20.4-62b47a)](docs/PILOT_1.20.x.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+## Branches
+
+- `1.20.x` ist die aktuelle Entwicklungs-Branch. Sie unterstützt Minecraft
+  1.20.2, 1.20.3 und 1.20.4.
+- `legacy` ist der alte Stand aus `master` mit seinem eigenen Build. Neue
+  Versionsadapter gehören nicht in diese Branch.
+
+Der gemeinsame Code wird nur einmal gepflegt. Stonecutter baut daraus je
+Minecraft-Version ein eigenes kompatibles JAR.
+
+## Development quick start
 
 The root project exposes short commands, so the Stonecutter project paths do not
 need to be memorized:
@@ -6,24 +29,35 @@ need to be memorized:
 ```powershell
 .\gradlew.bat client                    # Start Minecraft 1.20.4
 .\gradlew.bat client1201                # Start Minecraft 1.20.1
+.\gradlew.bat client1202                # Start Minecraft 1.20.2
+.\gradlew.bat client1204                # Start Minecraft 1.20.4 explicitly
+.\gradlew.bat server1202                # Start server 1.20.2
+.\gradlew.bat server1204                # Start server 1.20.4
+.\gradlew.bat testAll                   # Run tests for every version
+.\gradlew.bat jars                      # Build every versioned JAR
 .\gradlew.bat pilotCheck                # Test and build every pilot variant
 .\gradlew.bat ideaRuns                  # Regenerate versioned IntelliJ runs
 .\gradlew.bat thermiteHelp              # Show all short commands
 ```
 
-The 1.20.4 client is the default because it is the newest pilot node.
+The 1.20.4 client is the default because it is the newest supported node.
 
 ### License
 This mod is available under the MIT license.
 
-### Dependencies for Latest Version
-[Fabric Api](https://modrinth.com/mod/fabric-api/version/0.83.1+1.20.1) >=0.83.1 for mc 1.20.1
+### Current 1.20.x support
 
-[CompleteConfig](https://modrinth.com/mod/completeconfig/version/2.5.0) >=2.5.0 for mc 1.20.1
+- Minecraft: 1.20.2, 1.20.3 and 1.20.4
+- Fabric API: 0.91.6+1.20.2 and 0.97.3+1.20.4
+- CompleteConfig: 2.5.0 for 1.20.2 and 2.5.3 for 1.20.4
+- 1.20.1 remains available as a reference build
+
+Exact mappings, loaders and artifact names are listed in
+[`docs/PILOT_1.20.x.md`](docs/PILOT_1.20.x.md).
 
 [Roughly Enough Items](https://modrinth.com/mod/rei/version/12.0.625+fabric) (Recommended)
 
-# Description
+## Description
 This is a fabric mod that adds a body temperature system based on what biome you are in, the time of day, weather conditions and what blocks are around you. If you get too cold or hot you will start to take damage, but there are ways to maintain a good temperature.
 
 
@@ -84,19 +118,20 @@ The direction icon is the icon in the middle of the gauge. is a white ball when 
 #### Temperature cooling down:
 <img src="https://cdn-raw.modrinth.com/data/ggmtYNuc/images/fe9742ccde814a169dbff4c9a89dca2ff65e4866.png"  width="50%" height="50%">
 
-### 1.20.x pilot builds
+## 1.20.x builds
 
 The `1.20.x` branch uses Stonecutter to keep shared sources and small
-version adapters in one branch. It produces separate, remapped jars:
+version adapters in one branch. It produces separate, remapped JARs:
 
 - `therm-6.0.0-alpha.1+mc1.20.1.jar`
+- `therm-6.0.0-alpha.1+mc1.20.2.jar`
 - `therm-6.0.0-alpha.1+mc1.20.3-1.20.4.jar`
 
-Build and test both variants with:
+Build and test all supported variants with:
 
 ```powershell
-.\gradlew.bat :1.20.1:test :1.20.4:test
-.\gradlew.bat :1.20.1:buildAndCollect :1.20.4:buildAndCollect
+.\gradlew.bat testAll
+.\gradlew.bat jars
 ```
 
 Collected artifacts are written to `build/libs/6.0.0-alpha.1/`. See

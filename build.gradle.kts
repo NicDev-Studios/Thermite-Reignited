@@ -1,3 +1,7 @@
+// Copyright (c) 2023 sparkierkan7
+// Modifications Copyright (c) 2026 NicDev-Studios
+// SPDX-License-Identifier: MIT
+
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
 
 plugins {

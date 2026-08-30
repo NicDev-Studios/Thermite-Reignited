@@ -1,10 +1,14 @@
+// Copyright (c) 2023 sparkierkan7
+// Modifications Copyright (c) 2026 NicDev-Studios
+// SPDX-License-Identifier: MIT
+
 plugins {
     id("dev.kikugie.stonecutter")
 }
 
 stonecutter active "1.20.1"
 
-val supportedMinecraftVersions = setOf("1.20.1", "1.20.4")
+val supportedMinecraftVersions = setOf("1.20.1", "1.20.2", "1.20.4")
 val selectedMinecraftVersion = providers.gradleProperty("mc").orElse("1.20.4")
 
 fun selectedNodeTask(taskName: String) = selectedMinecraftVersion.map { version ->
@@ -32,6 +36,12 @@ tasks.register("client1204") {
     dependsOn(":1.20.4:runClient")
 }
 
+tasks.register("client1202") {
+    group = "thermite"
+    description = "Starts the Minecraft 1.20.2 development client."
+    dependsOn(":1.20.2:runClient")
+}
+
 tasks.register("server") {
     group = "thermite"
     description = "Starts the default Minecraft 1.20.4 development server."
@@ -50,16 +60,22 @@ tasks.register("server1204") {
     dependsOn(":1.20.4:runServer")
 }
 
+tasks.register("server1202") {
+    group = "thermite"
+    description = "Starts the Minecraft 1.20.2 development server."
+    dependsOn(":1.20.2:runServer")
+}
+
 tasks.register("jars") {
     group = "thermite"
     description = "Builds and collects every supported Thermite jar."
-    dependsOn(":1.20.1:buildAndCollect", ":1.20.4:buildAndCollect")
+    dependsOn(":1.20.1:buildAndCollect", ":1.20.2:buildAndCollect", ":1.20.4:buildAndCollect")
 }
 
 tasks.register("testAll") {
     group = "thermite"
     description = "Runs the shared tests against every supported Minecraft version."
-    dependsOn(":1.20.1:test", ":1.20.4:test")
+    dependsOn(":1.20.1:test", ":1.20.2:test", ":1.20.4:test")
 }
 
 tasks.register("pilotCheck") {
@@ -71,7 +87,7 @@ tasks.register("pilotCheck") {
 tasks.register("ideaRuns") {
     group = "thermite"
     description = "Regenerates version-labelled IntelliJ client and server configurations."
-    dependsOn(":1.20.1:ideaSyncTask", ":1.20.4:ideaSyncTask")
+    dependsOn(":1.20.1:ideaSyncTask", ":1.20.2:ideaSyncTask", ":1.20.4:ideaSyncTask")
 }
 
 tasks.register("thermiteHelp") {
@@ -84,12 +100,14 @@ tasks.register("thermiteHelp") {
             -----------------------------
             gradlew client                         Start Minecraft 1.20.4
             gradlew client1201                     Start Minecraft 1.20.1
+            gradlew client1202                     Start Minecraft 1.20.2
             gradlew client1204                     Start Minecraft 1.20.4 explicitly
             gradlew server                         Start server 1.20.4
             gradlew server1201                     Start server 1.20.1
+            gradlew server1202                     Start server 1.20.2
             gradlew server1204                     Start server 1.20.4 explicitly
-            gradlew jars                           Build both distributable jars
-            gradlew testAll                        Test both versions
+            gradlew jars                           Build every distributable jar
+            gradlew testAll                        Test every supported version
             gradlew pilotCheck                     Test and build everything
             gradlew ideaRuns                       Regenerate IntelliJ run entries
             gradlew tasks --group thermite         Show these tasks

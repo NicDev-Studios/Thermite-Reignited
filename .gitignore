@@ -1,3 +1,6 @@
+# Copyright (c) 2026 NicDev-Studios
+# SPDX-License-Identifier: MIT
+
 # gradle
 
 .gradle/
@@ -31,6 +34,7 @@ bin/
 # fabric
 
 run/
+versions/*/logs/
 
 # java
 

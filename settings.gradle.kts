@@ -1,3 +1,7 @@
+// Copyright (c) 2023 sparkierkan7
+// Modifications Copyright (c) 2026 NicDev-Studios
+// SPDX-License-Identifier: MIT
+
 pluginManagement {
     repositories {
         mavenCentral()
@@ -15,7 +19,7 @@ plugins {
 
 stonecutter {
     create(rootProject) {
-        versions("1.20.1", "1.20.4")
+        versions("1.20.1", "1.20.2", "1.20.4")
         vcsVersion = "1.20.1"
     }
 }

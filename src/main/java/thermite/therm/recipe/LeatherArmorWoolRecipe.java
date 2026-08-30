@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023 sparkierkan7
+ * Modifications Copyright (c) 2026 NicDev-Studios
+ * SPDX-License-Identifier: MIT
+ */
+
 package thermite.therm.recipe;
 
 import net.minecraft.inventory.RecipeInputInventory;
@@ -14,7 +20,7 @@ import thermite.therm.ThermMod;
 
 public class LeatherArmorWoolRecipe extends SpecialCraftingRecipe {
 
-    //? if >=1.20.3 {
+    //? if >=1.20.2 {
     /*public LeatherArmorWoolRecipe(CraftingRecipeCategory craftingRecipeCategory) {
         super(craftingRecipeCategory);
     }
@@ -84,7 +90,7 @@ public class LeatherArmorWoolRecipe extends SpecialCraftingRecipe {
         return width * height >= 2;
     }
 
-    //? if <1.20.3 {
+    //? if <1.20.2 {
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
         return new ItemStack(Items.LEATHER_HELMET);

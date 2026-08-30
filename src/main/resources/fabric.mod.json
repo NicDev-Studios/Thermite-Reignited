@@ -1,11 +1,12 @@
 {
 	"schemaVersion": 1,
-	"id": "therm",
+	"id": "therm-reignited",
 	"version": "${version}",
-	"name": "Thermite",
+	"name": "Thermite-Reignited",
 	"description": "A fabric mod that adds a temperature system.",
 	"authors": [
-		"sparkierkan7"
+		"sparkierkan7",
+		"NicDevTV"
 	],
 	"contact": {
 		"homepage": "",

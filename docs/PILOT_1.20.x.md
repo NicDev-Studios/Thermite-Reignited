@@ -1,73 +1,77 @@
-# Thermite 1.20.x pilot
+<!--
+Copyright (c) 2023 sparkierkan7
+Modifications Copyright (c) 2026 NicDev-Studios
+SPDX-License-Identifier: MIT
+-->
 
-## Build matrix
+# Thermite 1.20.x
 
-| Node | Minecraft runtime | Yarn | Fabric Loader | Fabric API | CompleteConfig | Artifact suffix |
-| --- | --- | --- | --- | --- | --- | --- |
-| `1.20.1` | 1.20.1 | `1.20.1+build.3` | 0.14.21 | 0.83.1+1.20.1 | 2.5.0 | `mc1.20.1` |
-| `1.20.4` | 1.20.3–1.20.4 | `1.20.4+build.3` | 0.15.11 | 0.97.3+1.20.4 | 2.5.3 | `mc1.20.3-1.20.4` |
+This is a quick note about the current 1.20.x setup. The important part is
+that the old code and the new multi-version build are kept separate.
 
-The build uses Stonecutter 0.9.7, Loom 1.17.12 through the Loom back-compat
-plugin, and Gradle 9.5.1. Archives have stable entry order and timestamps.
+## Branches
 
-## Architecture
+`legacy` is the old `master` branch. It has its own old Gradle build and is
+kept as-is for reference. New Minecraft version work does not go there.
 
-- `thermite.therm.core` contains the Minecraft-independent temperature engine,
-  state, environment snapshot, and config model.
-- `ThermConfigAdapter` is the only bridge from CompleteConfig to the core model.
-- `ThermPlatform` owns content/recipe/network/HUD registration, biome and player
-  access, persistent state access, damage, and S2C synchronization.
-- `FabricThermPlatform` and `FabricClientThermPlatform` implement that boundary
-  for the current 1.20.x nodes.
-- `TemperatureService` runs once per second from the server tick. No C2S packet
-  can request or accelerate a temperature sample.
+`1.20.x` is the active branch for Minecraft 1.20. The shared mod code lives in
+`src/main` and is written only once. Stonecutter creates the version projects
+and applies the few API fixes that are needed. We do not copy the whole mod
+into a separate folder for every version.
 
-The S2C payload order remains `temperature`, `direction`, `windPitch`,
-`windYaw`, and `windTemperature`. Existing registry identifiers and persistence
-keys are unchanged, including player temperature fields, fireplace `time`, and
-item NBT key `wool`. CompleteConfig continues to use `config/therm.conf`.
+## Supported versions
 
-## Version adapters
+| Minecraft | Notes | JAR |
+| --- | --- | --- |
+| 1.20.1 | Reference build for comparison | `therm-6.0.0-alpha.1+mc1.20.1.jar` |
+| 1.20.2 | Separate build and adapter | `therm-6.0.0-alpha.1+mc1.20.2.jar` |
+| 1.20.3 | Uses the 1.20.4 adapter | `therm-6.0.0-alpha.1+mc1.20.3-1.20.4.jar` |
+| 1.20.4 | Build node for the newer 1.20 API | `therm-6.0.0-alpha.1+mc1.20.3-1.20.4.jar` |
 
-Stonecutter conditionals are intentionally limited to the API breaks introduced
-for 1.20.3:
+So the current 1.20.x release range is **1.20.2 through 1.20.4**. The 1.20.1
+build stays around so changes can still be compared against the old baseline.
 
-- block codec and block-entity ticker validation in `FireplaceBlock`;
-- special crafting recipe constructor/output changes;
-- `PersistentState.Type` loading.
+## What is version-specific?
 
-Pack metadata is expanded per node. The 1.20.4 resource pack advertises formats
-18–22 so the same artifact can be tested on 1.20.3 and 1.20.4.
+Only the parts that actually changed in Minecraft are adapted:
 
-## Automated verification
+- block codecs and block-entity tickers;
+- special crafting recipes;
+- the `PersistentState` loading API.
+
+Temperature calculation, player data, NBT keys, recipes and resources are
+shared. Temperature ticks are calculated on the server, so a client cannot
+request extra ticks or speed up the calculation.
+
+## Build and run
+
+Run these from the project directory:
 
 ```powershell
-.\gradlew.bat client
-.\gradlew.bat client1201
-.\gradlew.bat server
-.\gradlew.bat server1201
-.\gradlew.bat testAll
-.\gradlew.bat jars
-.\gradlew.bat pilotCheck
-.\gradlew.bat ideaRuns
-.\gradlew.bat thermiteHelp
+.\gradlew.bat pilotCheck       # run tests and build all JARs
+.\gradlew.bat testAll         # run tests for every version
+.\gradlew.bat jars            # build all versioned JARs
+.\gradlew.bat client1202      # start the 1.20.2 client
+.\gradlew.bat client1204      # start the 1.20.4 client
+.\gradlew.bat server1202      # start a 1.20.2 server
+.\gradlew.bat server1204      # start a 1.20.4 server
 ```
 
-The server commands intentionally stop at Mojang's EULA on a new checkout.
-After the developer has reviewed and accepted it in each ignored run directory,
-repeat the commands and stop each server with `stop` after the `Done` line.
+The 1.20.x workflow runs on every push and pull request on Linux and Windows.
+`pilotCheck` compiles all three build nodes, runs the tests and collects the
+three JARs.
 
-## Manual acceptance checklist
+There are currently 12 tests per build node: temperature behaviour, NBT
+persistence, and the important packaged resources/metadata. That checks the
+shared code and catches version-specific compile problems. It does not replace
+starting the game and loading a test world.
 
-- Start client and dedicated server on 1.20.1, 1.20.3, and 1.20.4.
-- Copy a disposable 1.20.1 test world, then verify player state, wool armor NBT,
-  fireplace time, blocks, and items after loading it in 1.20.4.
-- Exercise daytime/night, rain/snow, water, armor, held items, heating/cooling
-  blocks, wind shelter/height, Ice Box, Fireplace, Cooling, and both HUD styles.
-- Verify all recipes and inspect both client and server logs for missing assets,
-  recipe errors, registry errors, and mixin failures.
-- In multiplayer, use an unmodified client and a client that sends the removed
-  legacy temperature packet identifier. Neither may alter the server sample rate.
+## Still worth checking in-game
 
-If the 1.20.4-compiled jar fails specifically on a 1.20.3 runtime, add a `1.20.3`
-Stonecutter node in this branch; do not create a separate long-lived branch.
+- Start the client and dedicated server on 1.20.2, 1.20.3 and 1.20.4.
+- Load a copied 1.20.1 world and check player data, wool armour, fireplace
+  time, blocks and items.
+- Try temperature changes from weather, night, water, armour, wind, the Ice
+  Box, Fireplace, Cooling and all recipes/HUDs.
+- Check client and server logs for missing resources, recipe errors or mixin
+  failures.

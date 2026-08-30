@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023 sparkierkan7
+ * Modifications Copyright (c) 2026 NicDev-Studios
+ * SPDX-License-Identifier: MIT
+ */
+
 package thermite.therm.core;
 
 import static thermite.therm.core.EnvironmentSnapshot.Precipitation.RAIN;

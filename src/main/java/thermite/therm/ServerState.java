@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023 sparkierkan7
+ * Modifications Copyright (c) 2026 NicDev-Studios
+ * SPDX-License-Identifier: MIT
+ */
+
 package thermite.therm;
 
 import net.minecraft.entity.LivingEntity;
@@ -12,7 +18,7 @@ import java.util.UUID;
 
 public class ServerState extends PersistentState {
 
-    //? if >=1.20.3 {
+    //? if >=1.20.2 {
     /*private static final PersistentState.Type<ServerState> TYPE = new PersistentState.Type<>(
             ServerState::new,
             ServerState::createFromNbt,
@@ -123,7 +129,7 @@ public class ServerState extends PersistentState {
         PersistentStateManager persistentStateManager = server
                 .getWorld(World.OVERWORLD).getPersistentStateManager();
 
-        //? if >=1.20.3 {
+        //? if >=1.20.2 {
         /*ServerState serverState = persistentStateManager.getOrCreate(TYPE, ThermMod.modid);
         *///?} else {
         ServerState serverState = persistentStateManager.getOrCreate(

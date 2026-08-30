@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023 sparkierkan7
+ * Modifications Copyright (c) 2026 NicDev-Studios
+ * SPDX-License-Identifier: MIT
+ */
+
 package thermite.therm.networking;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
