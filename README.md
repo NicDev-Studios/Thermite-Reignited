@@ -1,12 +1,34 @@
+# Thermite-Reignited (legacy)
+
+> **Legacy branch — Minecraft 1.20.1 only.**
+> This branch is kept for the original 1.20.1 build and is not the place for
+> new version adapters. Current development and Minecraft 1.20.2–1.20.4
+> support live on the [`1.20.x` branch](https://github.com/NicDev-Studios/Thermite-Reignited/tree/1.20.x).
+
+The legacy build intentionally keeps its original Java 17, Gradle and Fabric
+toolchain. New CI or dependency updates belong on `1.20.x` unless they are a
+critical fix for this old build.
+
 ### License
 This mod is available under the MIT license.
 
-### Dependencies for Latest Version
+### Dependencies for the legacy 1.20.1 build
 [Fabric Api](https://modrinth.com/mod/fabric-api/version/0.83.1+1.20.1) >=0.83.1 for mc 1.20.1
 
 [CompleteConfig](https://modrinth.com/mod/completeconfig/version/2.4.0) >=2.4.0 for mc 1.20.1
 
 [Roughly Enough Items](https://modrinth.com/mod/rei/version/12.0.625+fabric) (Recommended)
+
+### Build and run
+This branch is a single Gradle project, so there are no `:1.20.2:` or
+`:1.20.4:` tasks here. Start the legacy 1.20.1 client or server with:
+
+```powershell
+.\gradlew.bat runClient
+.\gradlew.bat runServer
+```
+
+In IntelliJ, reload the Gradle project and select `Minecraft Client (legacy 1.20.1)`.
 
 # Description
 This is a fabric mod that adds a body temperature system based on what biome you are in, the time of day, weather conditions and what blocks are around you. If you get too cold or hot you will start to take damage, but there are ways to maintain a good temperature.
