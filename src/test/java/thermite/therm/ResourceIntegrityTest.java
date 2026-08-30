@@ -41,7 +41,7 @@ class ResourceIntegrityTest {
         String modMetadata = readResource("fabric.mod.json");
         String packMetadata = readResource("pack.mcmeta");
 
-        assertTrue(modMetadata.contains("\"id\":"));
+        assertTrue(modMetadata.contains("\"id\": \"therm\""));
         assertTrue(modMetadata.contains("\"version\": \"6.0.0-alpha.1+mc"));
         assertFalse(modMetadata.contains("${"));
         assertFalse(packMetadata.contains("${"));

@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "therm-reignited",
+	"id": "therm",
 	"version": "${version}",
 	"name": "Thermite-Reignited",
 	"description": "A fabric mod that adds a temperature system.",
